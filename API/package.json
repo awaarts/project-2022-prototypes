@@ -1,0 +1,20 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awaarts/project-2022-prototypes.git"
+  },
+  "author": "Alex Waarts",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/awaarts/project-2022-prototypes/issues"
+  },
+  "homepage": "https://github.com/awaarts/project-2022-prototypes#readme"
+}
