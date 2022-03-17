@@ -5,10 +5,11 @@
 ### 1. API
 Prototype voor API structuur.
 bevat
-1. RPC
-2. SOAP
+1. GraphQL
 3. REST
-4. GRAPHQL
+
+#### GraphQL
+Prototype voor API calls door middel van GraphQL. Zie readme voor installatie handleiding.
 
 ### 2. Worker
 Prototype voor Worker Structuur
