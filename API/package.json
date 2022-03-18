@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/awaarts/project-2022-prototypes#readme",
   "dependencies": {
+    "@babel/core": "^7.17.7",
     "apollo-server-express": "^3.6.4",
     "express": "^4.17.3",
     "graphql": "^16.3.0",
