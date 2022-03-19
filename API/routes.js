@@ -4,23 +4,51 @@ const router = express.Router();
 
 router.get("/users", async (req, res) => {
 	const users = await User.find();
-	res.send(users);
+
+  var html = "<h1>Rest API</h1><table> <tr> <th>Naam</th> <th>Gewerkte uren</th> </tr>";
+  
+  for(let i = 0; i < users.length; i++) {
+    html += "<tr> <td><a href='/api/users/" + users[i]._id + "'>" + users[i].name + "</a></td> \
+    <td>" + users[i].hoursWorked + "</td> \
+    <td><form action='/api/users/" + users[i]._id + "?_method=DELETE' method='post'> \
+    <input type='submit' value='Verwijderen'> \
+    </form></td></tr>";
+  }
+
+  html += "</table>";
+
+  html += "<h3>Uren toevoegen</h3><form action='/api/users' method='post'> \
+    <label for='name'>Naam:</label> \
+    <input type='text' id='name' name='name'><br><br> \
+    <label for='hoursWorked'>Gewerkte uren:</label> \
+    <input type='text' id='hoursWorked' name='hoursWorked'><br><br> \
+    <input type='submit' value='Verzenden'> \
+  </form>"
+  res.send(html);
 });
 
 router.post("/users", async (req, res) => {
-    console.log("name: " + req.body.name);
-	const user = new User({
+  console.log("name: " + req.body.name);
+  res.setHeader('Content-Type', 'application/json');
+	
+  const user = new User({
 		name: req.body.name,
 		hoursWorked: req.body.hoursWorked,
 	});
-	await user.save();
-	res.send(user);
+	
+  await user.save();
+	res.redirect("/api/users");
 });
 
 router.get("/users/:id", async (req, res) => {
 	try {
         const user = await User.findOne({ _id: req.params.id });
-	    res.send(user);
+        var html = "<h1>Rest API</h1><table> <tr> <th>Naam</th> <th>Gewerkte uren</th> </tr>";
+  
+        html += "<tr> <td>" + user.name + "</td><td>" + user.hoursWorked + "</td></tr>";
+
+        html += "</table>";
+        res.send(html);
     } 
     catch 
     {
