@@ -6,7 +6,7 @@
 Prototype voor API structuur.
 bevat
 1. GraphQL
-3. REST
+2. REST
 
 #### GraphQL
 Prototype voor API calls door middel van GraphQL. Zie readme voor installatie handleiding.
