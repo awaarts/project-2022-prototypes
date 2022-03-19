@@ -1,4 +1,4 @@
-##Worker prototype
+## Worker prototype
 
 Deze prototype zal de mogelijkheden van workers verkennen.
 Door workers te implementeren en een willekeurige vertraging te geven (om verwerking te simuleren)
