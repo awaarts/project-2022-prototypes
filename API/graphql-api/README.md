@@ -1,4 +1,4 @@
-# 4. Run GRAPHQL API
+# 1. Run GRAPHQL API
 
 1. Start Docker
 2. run npm install in API folder
