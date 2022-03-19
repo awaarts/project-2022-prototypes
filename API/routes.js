@@ -8,16 +8,16 @@ router.get("/users", async (req, res) => {
   var html = "<h1>Rest API</h1><table> <tr> <th>Naam</th> <th>Gewerkte uren</th> </tr>";
   
   for(let i = 0; i < users.length; i++) {
-    html += "<tr> <td><a href='/api/users/" + users[i]._id + "'>" + users[i].name + "</a></td> \
+    html += "<tr> <td><a href='/rest/users/" + users[i]._id + "'>" + users[i].name + "</a></td> \
     <td>" + users[i].hoursWorked + "</td> \
-    <td><form action='/api/users/" + users[i]._id + "?_method=DELETE' method='post'> \
+    <td><form action='/rest/users/" + users[i]._id + "?_method=DELETE' method='post'> \
     <input type='submit' value='Verwijderen'> \
     </form></td></tr>";
   }
 
   html += "</table>";
 
-  html += "<h3>Uren toevoegen</h3><form action='/api/users' method='post'> \
+  html += "<h3>Uren toevoegen</h3><form action='/rest/users' method='post'> \
     <label for='name'>Naam:</label> \
     <input type='text' id='name' name='name'><br><br> \
     <label for='hoursWorked'>Gewerkte uren:</label> \
@@ -28,16 +28,15 @@ router.get("/users", async (req, res) => {
 });
 
 router.post("/users", async (req, res) => {
-  console.log("name: " + req.body.name);
   res.setHeader('Content-Type', 'application/json');
 	
   const user = new User({
-		name: req.body.name,
-		hoursWorked: req.body.hoursWorked,
+		name: req.body.name != '' ? req.body.name : 'Nieuwe gebruiker',
+		hoursWorked: req.body.hoursWorked ? req.body.hoursWorked : 0,
 	});
 	
   await user.save();
-	res.redirect("/api/users");
+	res.redirect("/rest/users");
 });
 
 router.get("/users/:id", async (req, res) => {
@@ -81,7 +80,7 @@ router.patch("/users/:id", async (req, res) => {
 router.delete("/users/:id", async (req, res) => {
 	try {
 		await User.deleteOne({ _id: req.params.id });
-		res.status(204).send();
+		res.status(204).redirect("/rest/users");
 	} catch {
 		res.status(404);
 		res.send({ error: "User doesn't exist!" });
